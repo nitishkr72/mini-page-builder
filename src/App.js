@@ -1,19 +1,23 @@
 import "./App.css";
-import { useRef } from "react";
+import { useState } from "react";
 import SideToolbar from "./components/SideToolbar";
 import DropOverCanvas from "./components/DropOverCanvas";
+import { BlocksContext } from "./context/BlocksContext";
 
 function App() {
-  const draggedItem = useRef();
-
-  const handleDragStart = (e) => {
-    draggedItem.current = e.target.id;
-  };
+  const [blocksData, setBlocksData] = useState({
+    currDragTitle: undefined,
+    blocks: [],
+  });
 
   return (
     <div className="w-screen h-screen md:flex md:flex-row">
-      <DropOverCanvas />
-      <SideToolbar handleDragStart={handleDragStart} />
+      <BlocksContext.Provider value={{ blocksData, setBlocksData }}>
+        <>
+          <DropOverCanvas />
+          <SideToolbar />
+        </>
+      </BlocksContext.Provider>
     </div>
   );
 }

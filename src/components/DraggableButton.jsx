@@ -12,11 +12,8 @@ export default function DraggableButton({ title, onDragStart }) {
       }  flex flex-row items-center py-2 px-4 shadow-lg`}
       draggable
       onDragStart={(e) => {
-        // e.preventDefault();
         setIsDragging(true);
-        // console.log(e.target);
-        // e.dataTransfer.setDragImage(e.target, 0, 0);
-        onDragStart(e);
+        onDragStart(title);
       }}
       onDragEnd={() => setIsDragging(false)}
     >
