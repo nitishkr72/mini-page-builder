@@ -1,4 +1,3 @@
-import "./App.css";
 import { useState } from "react";
 import SideToolbar from "./components/SideToolbar";
 import DropOverCanvas from "./components/DropOverCanvas";
@@ -11,7 +10,7 @@ function App() {
   });
 
   return (
-    <div className="w-screen h-screen md:flex md:flex-row">
+    <div className="w-screen h-screen ">
       <BlocksContext.Provider value={{ blocksData, setBlocksData }}>
         <>
           <DropOverCanvas />
