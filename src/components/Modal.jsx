@@ -29,13 +29,14 @@ export default function Modal({ block, setOpenModal }) {
       <div className="bg-white w-5/6 md:w-[26rem] rounded-md shadow-sm">
         <div className="px-6 py-3 text-xl font-semibold border-b flex flex-row justify-between items-center">
           <span>Edit {block.title}</span>
-          <img
-            src="/ic_cross.svg"
-            alt="Close Form"
+          <div
             onClick={() => {
               setOpenModal(false);
             }}
-          />
+            className="p-1 cursor-pointer"
+          >
+            <img src="/ic_cross.svg" alt="Close Form" />
+          </div>
         </div>
 
         <div className="px-6 pb-6">
