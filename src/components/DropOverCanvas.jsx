@@ -36,7 +36,7 @@ export default function DropOverCanvas() {
             X,
             Y,
             labelText,
-            fontSize: 1,
+            fontSize: 16,
             fontWeight: 400,
             id: uuid,
           },

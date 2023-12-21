@@ -1,12 +1,18 @@
 import { useContext } from "react";
 import { BlocksContext } from "../context/BlocksContext";
 
-export function BlockView({ title, labelText }) {
+export function BlockView({ block }) {
+  const { title, labelText, fontSize, fontWeight } = block;
+
   switch (title) {
     case "Input":
       return (
         <div
-          className={`px-4 py-2 rounded-sm bg-white text-[#595959] font-normal text-base`}
+          className={`px-4 py-2 rounded-sm bg-white text-[#595959]`}
+          style={{
+            fontSize: `${fontSize / 16}rem`,
+            fontWeight: `${fontWeight}`,
+          }}
         >
           {labelText}
         </div>
@@ -14,7 +20,11 @@ export function BlockView({ title, labelText }) {
     case "Button":
       return (
         <div
-          className={` font-normal text-base bg-[#0044C1] text-white px-4 py-2 `}
+          className={`bg-[#0044C1] text-white px-4 py-2 `}
+          style={{
+            fontSize: `${fontSize / 16}rem`,
+            fontWeight: `${fontWeight}`,
+          }}
         >
           {labelText}
         </div>
@@ -22,7 +32,11 @@ export function BlockView({ title, labelText }) {
     default:
       return (
         <span
-          className={` font-normal text-base text-black  px-2 py-1 rounded-md`}
+          className={`text-black  px-2 py-1 rounded-md`}
+          style={{
+            fontSize: `${fontSize / 16}rem`,
+            fontWeight: `${fontWeight}`,
+          }}
         >
           {labelText}
         </span>

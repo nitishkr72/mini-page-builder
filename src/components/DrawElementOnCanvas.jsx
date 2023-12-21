@@ -86,7 +86,7 @@ export default function DrawElementOnCanvas({
         }}
         draggable
       >
-        <BlockView title={title} labelText={labelText} />
+        <BlockView block={block} />
       </div>
     </>
   );
