@@ -11,17 +11,18 @@ export function BlocksContextProvider({ children }) {
 
   useEffect(() => {
     const blocks = localStorage.getItem("blocks");
-    if (
-      JSON.stringify(blocksData.blocks) === JSON.stringify([]) &&
-      blocks !== null
-    ) {
+    if (blocks !== null) {
       setBlocksData({
-        ...blocksData,
+        currDragTitle: undefined,
+        currDragBlock: undefined,
         blocks: JSON.parse(blocks),
       });
-    } else {
-      localStorage.setItem("blocks", JSON.stringify(blocksData.blocks));
     }
+  }, []);
+
+  useEffect(() => {
+    if (blocksData.blocks.length > 0)
+      localStorage.setItem("blocks", JSON.stringify(blocksData.blocks));
   }, [blocksData]);
 
   return (

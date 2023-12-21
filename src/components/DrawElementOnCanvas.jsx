@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
 import { BlocksContext } from "../context/BlocksContext";
 import { BlockView } from "./BlockView";
@@ -9,11 +9,10 @@ export default function DrawElementOnCanvas({
   setSelectedBlockUUID,
 }) {
   const { title, X, Y, labelText, id } = block;
-
-  const { blocksData, setBlocksData } = useContext(BlocksContext);
-
   const viewportH = window.innerHeight || document.documentElement.clientHeight;
   const viewportW = window.innerWidth || document.documentElement.clientWidth;
+
+  const { blocksData, setBlocksData } = useContext(BlocksContext);
 
   const [openModal, setOpenModal] = useState(
     selectedBlockUUID && selectedBlockUUID.openModal
@@ -21,6 +20,8 @@ export default function DrawElementOnCanvas({
   const [isSelected, setIsSelected] = useState(
     selectedBlockUUID && id === selectedBlockUUID.id
   );
+
+  const divFocus = useRef(null);
 
   useEffect(() => {
     setIsSelected(selectedBlockUUID && id === selectedBlockUUID.id);
@@ -40,6 +41,7 @@ export default function DrawElementOnCanvas({
       }
     }
   }
+
   function handleDragStart() {
     setBlocksData({
       ...blocksData,
@@ -47,14 +49,23 @@ export default function DrawElementOnCanvas({
     });
   }
 
+  function handleModal(isOpen) {
+    setOpenModal(isOpen);
+    if (isSelected) {
+      divFocus.current.focus();
+    }
+  }
+
   return (
     <>
-      {openModal && <Modal block={block} setOpenModal={setOpenModal} />}
+      {openModal && <Modal block={block} setOpenModal={handleModal} />}
       <div
+        ref={divFocus}
         tabIndex={0}
+        role="button"
         onKeyDown={handleKeyDown}
         onDragStart={handleDragStart}
-        onClick={(e) => {
+        onClick={() => {
           if (selectedBlockUUID && selectedBlockUUID.id === id) {
             setSelectedBlockUUID(undefined);
           } else setSelectedBlockUUID({ id, openModal: false });
