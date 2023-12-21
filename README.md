@@ -2,69 +2,57 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Used React, ContextAPI, TailwindCSS, Javascript
 
-In the project directory, you can run:
+[Deployed on Netlify](https://6584249330feeee64b925ce3--vermillion-hotteok-e37c0c.netlify.app/)
 
-### `npm start`
+## How to run code
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+In the project directory, you can run using npm :
+`npm run start`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Understanding implementation
 
-### `npm test`
+- block : Label, Input or Button that can be dragged
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Each block is a object containing fields `id, title, X, Y, fontSize, fontWeight`
 
-### `npm run build`
+- `id` here is randlomly generated `(funciton defined in src/Utils/static.res)` for each block
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+React Context is used here for global data management, in context we are storing object as
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+{
+    currDragTitle       # This is string and contain title of the block
+                        that is currently being dragged from SideBar
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    currDragBlock       # This is string and contain ID of the block that
+                        is currently being dragged inside the drop region
+                        defined by DropOverCanvas component. Used only
+                        when you are dragging already created block,
 
-### `npm run eject`
+    blocks:             array of block object defined above,
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Components structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+-App
+    - DropOverCanvas            # blocks can be dragged into this region
 
-## Learn More
+        Used Compoents
+        - DrawElementOnCanvas   # handle view for each block
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+            Used Components
+            - Modal             # Cutom component to handle form that can edit block Object
+            - BlockView         # A stateless component that contains UI for each block
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    - SideToolbar               # contain blocks, buttons to clear and export data
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+        Used Components
+        - DraggableButtons      # Custom cumponent button that can be dragged
+        - button                # native button to add functionality like export and clear
+```
