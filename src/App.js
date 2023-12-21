@@ -7,6 +7,7 @@ function App() {
   const [blocksData, setBlocksData] = useState({
     currDragTitle: undefined,
     blocks: [],
+    selectedBlock: undefined,
   });
 
   return (
