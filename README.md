@@ -53,6 +53,6 @@ React Context is used here for global data management, in context we are storing
     - SideToolbar               # contain blocks, buttons to clear and export data
 
         Used Components
-        - DraggableButtons      # Custom cumponent button that can be dragged
+        - DraggableButtons      # Custom component button that can be dragged
         - button                # native button to add functionality like export and clear
 ```
