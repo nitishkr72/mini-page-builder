@@ -15,11 +15,15 @@ export default function DrawElementOnCanvas({
   const viewportH = window.innerHeight || document.documentElement.clientHeight;
   const viewportW = window.innerWidth || document.documentElement.clientWidth;
 
-  const [openModal, setOpenModal] = useState(selectedBlockUUID.openModal);
-  const [isSelected, setIsSelected] = useState(id === selectedBlockUUID);
+  const [openModal, setOpenModal] = useState(
+    selectedBlockUUID && selectedBlockUUID.openModal
+  );
+  const [isSelected, setIsSelected] = useState(
+    selectedBlockUUID && id === selectedBlockUUID.id
+  );
 
   useEffect(() => {
-    setIsSelected(id === selectedBlockUUID);
+    setIsSelected(selectedBlockUUID && id === selectedBlockUUID.id);
   }, [id, selectedBlockUUID]);
 
   function handleKeyDown(e) {
@@ -36,6 +40,12 @@ export default function DrawElementOnCanvas({
       }
     }
   }
+  function handleDragStart() {
+    setBlocksData({
+      ...blocksData,
+      currDragBlock: id,
+    });
+  }
 
   return (
     <>
@@ -45,10 +55,21 @@ export default function DrawElementOnCanvas({
       <div
         tabIndex={0}
         onKeyDown={handleKeyDown}
+        onDragStart={handleDragStart}
         onClick={(e) => {
-          setSelectedBlockUUID(id === selectedBlockUUID ? "" : id);
+          if (selectedBlockUUID && selectedBlockUUID.id === id) {
+            setSelectedBlockUUID(undefined);
+          } else setSelectedBlockUUID({ id, openModal: false });
         }}
-        className={`fixed text-black select-none cursor-grab `}
+        className={`fixed text-black select-none cursor-grab
+        hover:border-red-500 hover:border-2
+         ${
+           isSelected
+             ? "border-2 border-red-500"
+             : title === "Label" || title === "Button"
+             ? ""
+             : "border border-black border-opacity-5"
+         }`}
         style={{
           left: `${(x / viewportW) * 100}vw`,
           top: `${(y / viewportH) * 100}vh`,
@@ -56,11 +77,7 @@ export default function DrawElementOnCanvas({
         }}
         draggable
       >
-        <BlockView
-          title={title}
-          labelText={labelText}
-          isSelected={isSelected}
-        />
+        <BlockView title={title} labelText={labelText} />
       </div>
     </>
   );

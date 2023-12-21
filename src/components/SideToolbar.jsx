@@ -14,7 +14,7 @@ export default function SideToolbar() {
           return (
             <DraggableButton
               title={item.title}
-              onDragStart={() => {
+              onDragStart={(e) => {
                 setBlocksData({ ...blocksData, currDragTitle: item.title });
               }}
               key={index}

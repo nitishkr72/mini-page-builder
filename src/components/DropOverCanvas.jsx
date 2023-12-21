@@ -6,32 +6,46 @@ import { generateUID } from "../utils/static";
 export default function DropOverCanvas() {
   const { blocksData, setBlocksData } = useContext(BlocksContext);
 
-  const [selectedBlockUUID, setSelectedBlockUUID] = useState("");
+  const [selectedBlockUUID, setSelectedBlockUUID] = useState(undefined);
 
   const handleDrop = (x, y) => {
-    const uuid = generateUID();
-    const labelText =
-      "This is a " +
-      blocksData.currDragTitle.charAt(0).toUpperCase() +
-      blocksData.currDragTitle.slice(1);
+    if (blocksData.currDragBlock !== undefined) {
+      setBlocksData({
+        ...blocksData,
+        blocks: blocksData.blocks.map((item) => {
+          if (item.id === blocksData.currDragBlock) {
+            return { ...item, x, y };
+          }
+          return item;
+        }),
+        currDragBlock: undefined,
+      });
+    } else if (blocksData.currDragTitle !== undefined) {
+      const uuid = generateUID();
+      const labelText =
+        "This is a " +
+        blocksData.currDragTitle.charAt(0).toUpperCase() +
+        blocksData.currDragTitle.slice(1);
 
-    setBlocksData({
-      blocks: [
-        ...blocksData.blocks,
-        {
-          title: blocksData.currDragTitle,
-          x,
-          y,
-          labelText,
-          fontSize: undefined,
-          fontWeight: undefined,
-          id: uuid,
-        },
-      ],
-      currDragTitle: undefined,
-    });
+      setBlocksData({
+        ...blocksData,
+        blocks: [
+          ...blocksData.blocks,
+          {
+            title: blocksData.currDragTitle,
+            x,
+            y,
+            labelText,
+            fontSize: undefined,
+            fontWeight: undefined,
+            id: uuid,
+          },
+        ],
+        currDragTitle: undefined,
+      });
 
-    setSelectedBlockUUID({ id: uuid, openModal: true });
+      setSelectedBlockUUID({ id: uuid, openModal: true });
+    }
   };
 
   return (

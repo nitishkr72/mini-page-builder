@@ -6,8 +6,8 @@ import { BlocksContext } from "./context/BlocksContext";
 function App() {
   const [blocksData, setBlocksData] = useState({
     currDragTitle: undefined,
+    currDragBlock: undefined,
     blocks: [],
-    selectedBlock: undefined,
   });
 
   return (
