@@ -8,13 +8,13 @@ export default function DropOverCanvas() {
 
   const [selectedBlockUUID, setSelectedBlockUUID] = useState(undefined);
 
-  const handleDrop = (x, y) => {
+  const handleDrop = (X, Y) => {
     if (blocksData.currDragBlock !== undefined) {
       setBlocksData({
         ...blocksData,
         blocks: blocksData.blocks.map((item) => {
           if (item.id === blocksData.currDragBlock) {
-            return { ...item, x, y };
+            return { ...item, X, Y };
           }
           return item;
         }),
@@ -33,11 +33,11 @@ export default function DropOverCanvas() {
           ...blocksData.blocks,
           {
             title: blocksData.currDragTitle,
-            x,
-            y,
+            X,
+            Y,
             labelText,
-            fontSize: undefined,
-            fontWeight: undefined,
+            fontSize: 1,
+            fontWeight: 400,
             id: uuid,
           },
         ],

@@ -8,7 +8,7 @@ export default function DrawElementOnCanvas({
   selectedBlockUUID,
   setSelectedBlockUUID,
 }) {
-  const { title, x, y, labelText, id } = block;
+  const { title, X, Y, labelText, id } = block;
 
   const { blocksData, setBlocksData } = useContext(BlocksContext);
 
@@ -49,9 +49,7 @@ export default function DrawElementOnCanvas({
 
   return (
     <>
-      {openModal && (
-        <Modal block={{ x, y, title, labelText }} setOpenModal={setOpenModal} />
-      )}
+      {openModal && <Modal block={block} setOpenModal={setOpenModal} />}
       <div
         tabIndex={0}
         onKeyDown={handleKeyDown}
@@ -71,8 +69,8 @@ export default function DrawElementOnCanvas({
              : "border border-black border-opacity-5"
          }`}
         style={{
-          left: `${(x / viewportW) * 100}vw`,
-          top: `${(y / viewportH) * 100}vh`,
+          left: `${(X / viewportW) * 100}vw`,
+          top: `${(Y / viewportH) * 100}vh`,
           outline: "none",
         }}
         draggable

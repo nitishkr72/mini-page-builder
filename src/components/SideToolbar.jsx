@@ -22,6 +22,17 @@ export default function SideToolbar() {
           );
         })}
       </div>
+      <div>
+        <button
+          className="text-white text-base bg-[#0044C1] px-4 py-2 mt-4 rounded-sm"
+          onClick={() => {
+            localStorage.removeItem("blocks");
+            setBlocksData({ ...blocksData, blocks: [] });
+          }}
+        >
+          Clear Screen
+        </button>
+      </div>
     </div>
   );
 }
