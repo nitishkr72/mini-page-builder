@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Used React, ContextAPI, TailwindCSS, Javascript
 
-[Deployed on Netlify](https://6584249330feeee64b925ce3--vermillion-hotteok-e37c0c.netlify.app/)
+[Deployed on Netlify](https://658683244f64155e6b031759--clinquant-kashata-f6d693.netlify.app/)
 
 ## How to run code
 
