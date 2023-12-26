@@ -32,8 +32,10 @@ export default function DrawElementOnCanvas({
       if (e.key === "Enter") {
         setOpenModal(true);
       } else if (e.key === "Delete") {
+        setSelectedBlockUUID(undefined);
         setBlocksData({
           ...blocksData,
+          undoObject: [...blocksData.undoObject, block],
           blocks: blocksData.blocks.filter((item) => {
             return !(item.id === id);
           }),

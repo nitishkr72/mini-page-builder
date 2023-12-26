@@ -57,6 +57,20 @@ export default function SideToolbar() {
           Export
         </button>
       </div>
+      <button
+        className="px-4 py-1 mt-4 bg-blue-500 text-white"
+        onClick={() => {
+          if (blocksData.undoObject.length > 0) {
+            setBlocksData({
+              ...blocksData,
+              blocks: [...blocksData.blocks, blocksData.undoObject.pop()],
+              undoObject: blocksData.undoObject,
+            });
+          }
+        }}
+      >
+        Undo
+      </button>
     </div>
   );
 }

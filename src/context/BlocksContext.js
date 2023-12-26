@@ -6,6 +6,7 @@ export function BlocksContextProvider({ children }) {
   const [blocksData, setBlocksData] = useState({
     currDragTitle: undefined,
     currDragBlock: undefined,
+    undoObject: [],
     blocks: [],
   });
 
@@ -16,6 +17,7 @@ export function BlocksContextProvider({ children }) {
         currDragTitle: undefined,
         currDragBlock: undefined,
         blocks: JSON.parse(blocks),
+        undoObject: [],
       });
     }
   }, []);
